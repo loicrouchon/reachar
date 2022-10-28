@@ -1,0 +1,52 @@
+name: Build
+
+on: push
+
+jobs:
+  env:
+    name: Initialize environment
+    runs-on: ubuntu-latest
+    outputs:
+      gradle-args: ${{ steps.gradle.outputs.args }}
+    steps:
+      - id: gradle
+        name: Compute gradlew args
+        run: echo ::set-output name=args::"--info --console=plain"
+
+  test:
+    name: Test
+    needs: [ env ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - uses: actions/setup-java@v2
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Environment check
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: -v
+
+      - name: Build application
+        uses: gradle/gradle-build-action@v2
+        with:
+          arguments: ${{ needs.env.outputs.gradle-args }} build
+
+      - name: Publish Unit Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: build/test-results/**/*.xml
+
+      - name: Upload test reports
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: test-reports
+          path: |
+            build/reports
+            build/test-results

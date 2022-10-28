@@ -1,0 +1,8 @@
+image:https://img.shields.io/github/workflow/status/loicrouchon/reachar/Build?logo=GitHub&style=for-the-badge[Build,link="https://github.com/loicrouchon/reachar/actions?query=workflow%3A%22Build%22"]
+image:https://img.shields.io/github/workflow/status/loicrouchon/reachar/CodeQL?logo=GitHub&style=for-the-badge&label=CodeQL[CodeQL,link="https://github.com/loicrouchon/reachar/actions?query=workflow%3A%22CodeQL%22"]
+image:https://img.shields.io/github/license/loicrouchon/reachar?style=for-the-badge&logo=apache[License,link="https://github.com/loicrouchon/reachar/blob/main/LICENSE"]
+image:https://img.shields.io/github/languages/code-size/loicrouchon/reachar?logo=java&style=for-the-badge[Code Size,link="https://github.com/loicrouchon/reachar/archive/refs/heads/main.zip"]
+
+== Reachar, reachability analysis for your jars
+
+Reachar is a tool analyzing jars content and perform a reachability analysis for classes, methods and fields.
